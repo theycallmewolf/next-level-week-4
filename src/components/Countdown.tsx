@@ -1,8 +1,10 @@
 import { useCallback, useState, useEffect } from 'react';
 import styles from '../styles/components/Countdown.module.css';
 
+let countdownTimeout: NodeJS.Timeout;
+
 export default function Countdown() {
-  const [time, setTime] = useState(23 * 60);
+  const [time, setTime] = useState(.05 * 60);
   const [isActive, setIsActive] = useState(false);
 
   const minutes =  Math.floor(time / 60);
@@ -15,9 +17,15 @@ export default function Countdown() {
     setIsActive(true);
   }, []);
   
-  useEffect(() =>{
+  const resetCountDown = useCallback(() => {
+    clearTimeout(countdownTimeout);
+    setIsActive(false);
+    setTime(.05 * 60);
+  }, []);
+  
+  useEffect(() => {
     if(isActive && time > 0) {
-      setTimeout(() =>{
+      countdownTimeout = setTimeout(() =>{
         setTime(time -1);
       }, 1000);
     }
@@ -37,12 +45,21 @@ export default function Countdown() {
         </div>
       </div>
 
-      <button 
-        type="button"
-        onClick={startCountDown}
-        className={styles.countdownButton}>
-          Começar
+      { isActive ? (
+        <button 
+          type="button"
+          onClick={resetCountDown}
+          className={`${styles.countdownButton} ${styles.countdownButtonActive}`}>
+            Cancelar
         </button>
+      ) : (
+        <button 
+          type="button"
+          onClick={startCountDown}
+          className={styles.countdownButton}>
+            Começar
+        </button>
+      )}
     </div>
   )
 }
