@@ -45,6 +45,8 @@ export function ChallengesProvider({children}: ChallengesProviderProps) {
     const challenge = challenges[randomChallengeIndex];
     setActiveChallenge(challenge);
 
+    new Audio('/notification.mp3').play()
+
     const options = {
       body: `Faz o novo desafio e ganha ${challenge.amount} xp!`,
     }
