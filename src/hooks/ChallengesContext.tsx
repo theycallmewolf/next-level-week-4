@@ -52,14 +52,14 @@ export function ChallengesProvider({children}: ChallengesProviderProps) {
     }
 
     const { amount } = activeChallenge;
-    let finalExperience = currentExperience + amount;
+    let totalExperience = currentExperience + amount;
 
-    if(finalExperience >= experienceToNextLevel){
-      finalExperience = finalExperience - experienceToNextLevel;
+    if(totalExperience >= experienceToNextLevel){
+      totalExperience = totalExperience - experienceToNextLevel;
       levelUp();
     }
     
-    setCurrentExperience(finalExperience);
+    setCurrentExperience(totalExperience);
     setActiveChallenge(null);
     setChallengesCompleted(challengesCompleted + 1);
   }

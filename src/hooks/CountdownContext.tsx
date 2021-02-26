@@ -35,6 +35,7 @@ export function CountdownProvider({children} : CountdownProviderProps) {
   const resetCountDown = useCallback(() => {
     clearTimeout(countdownTimeout);
     setIsActive(false);
+    setHasFinished(false);
     setTime(.05 * 60);
   }, []);
   
