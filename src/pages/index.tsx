@@ -7,6 +7,7 @@ import Countdown from '../components/Countdown';
 import ExperienceBar from "../components/ExperienceBar";
 import Profile from '../components/Profile';
 import { CountdownProvider } from '../hooks/CountdownContext';
+import { ChallengesProvider } from '../hooks/ChallengesContext';
 
 import styles from '../styles/pages/Home.module.css';
 
@@ -15,25 +16,27 @@ export default function Home(props) {
   console.log({props});
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Início | move.it</title>
-      </Head>
-      <ExperienceBar />
+    <ChallengesProvider>
+      <div className={styles.container}>
+        <Head>
+          <title>Início | move.it</title>
+        </Head>
+        <ExperienceBar />
 
-      <CountdownProvider>
-        <section>
-          <div>
-            <Profile />
-            <CompletedChallenges />
-            <Countdown />
-          </div>
-          <div>
-            <ChallengeBox />
-          </div>
-        </section>
-      </CountdownProvider>
-    </div>
+        <CountdownProvider>
+          <section>
+            <div>
+              <Profile />
+              <CompletedChallenges />
+              <Countdown />
+            </div>
+            <div>
+              <ChallengeBox />
+            </div>
+          </section>
+        </CountdownProvider>
+      </div>
+    </ChallengesProvider>
   );
 }
 
